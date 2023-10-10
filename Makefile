@@ -17,10 +17,10 @@ INCLUDES = -I./includes
 OBJS = $(SRCS:.c=.o)
 
 $(NAME): $(OBJS)
-	$(MAKE) -C ./libft
+	make -C ./libft
 	cp libft/libft.a $(NAME)
 	$(CC) $(FLAGS) $(SRCS)
-	ar -rcs $(NAME) $(OBJS)
+	ar rcs $(NAME) $(OBJS)
 
 all : $(NAME)
 
