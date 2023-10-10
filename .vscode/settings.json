@@ -2,6 +2,11 @@
     "files.associations": {
         "stdlib.h": "c",
         "libft.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "ftprintf.h": "c",
+        "printf.h": "c",
+        "atomic": "c",
+        "bitset": "c",
+        "ft_printf.h": "c"
     }
 }
