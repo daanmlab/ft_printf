@@ -6,7 +6,7 @@
 /*   By: dabalm <dabalm@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 13:45:05 by dabalm            #+#    #+#             */
-/*   Updated: 2023/10/10 13:22:43 by dabalm           ###   ########.fr       */
+/*   Updated: 2023/10/10 20:01:48 by dabalm           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int checktype(char *t, va_list d)
 {
 	char *options;
 	void *temp;
-	long temp1;
 	
 	options = "cspdiuxX%";
 	if (!contains(*t, options))
@@ -48,19 +47,7 @@ int checktype(char *t, va_list d)
 	else if (*t == 'd' || *t == 'i')
 		return putnbr_base(va_arg(d, int), "0123456789");
 	else if (*t == 'p')
-	{
-		ft_putstr_fd("0x", 1);
-		temp1 = va_arg(d, unsigned long);
-		if (temp1 == LONG_MIN || (unsigned long)temp1 == ULONG_MAX)
-		{
-			if (temp1 == LONG_MIN)
-				ft_putstr_fd("8000000000000000", 1);
-			if ((unsigned long)temp1 == ULONG_MAX)
-				ft_putstr_fd("ffffffffffffffff", 1);
-			return 18;
-		}
-		return putnbr_base(temp1, "0123456789abcdef") + 2;
-	} 
+		return put_pointer_addr(va_arg(d, void *));
 	else if (*t == 'u')
 		return putnbr_base(va_arg(d, unsigned int), "0123456789");
 	else if (*t == 'x')
@@ -114,10 +101,10 @@ int    ft_printf(const char *format, ...)
 // 	// printf(" %c %c %c \n\n", 0, '1', '2');
 	
 // 	printf("m:%d \n",  
-// 	ft_printf(" %p %p ", ULONG_MAX, -0)
+// 		ft_printf("%p", (void *)-2)
 // 	);
 // 	printf("t:%d ", 
-// 	printf(" %lu %p ", ULONG_MAX, -0)
+// 		printf("%p ", (void *)-2)
 // 	);
 
 // 	// printf("%ld, %ld", LONG_MIN, LONG_MAX);

@@ -1,17 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   putnbr_base.c                                      :+:      :+:    :+:   */
+/*   put_pointer_addr.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dabalm <dabalm@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/08 15:27:23 by dabalm            #+#    #+#             */
-/*   Updated: 2023/10/10 19:48:03 by dabalm           ###   ########.fr       */
+/*   Created: 2023/10/10 19:51:10 by dabalm            #+#    #+#             */
+/*   Updated: 2023/10/11 15:33:30 by dabalm           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "ft_printf.h"
-int get_int_len(long n, char *base)
+
+int get_pointer_addr_len(unsigned long n, char *base)
 {
     int baselen;
     int len;
@@ -28,30 +30,25 @@ int get_int_len(long n, char *base)
     return (len);
 }
 
-int putnbr_base(long n, char *base)
+int put_pointer_addr(void *p)
 {
-    char *str;
-    long long nb;
-    int num_len;
+    char str[16];
+    unsigned long nb;
     int base_len;
+    int len;
+    char *base;
     int i;
 
-    nb = n;
+    base = "0123456789abcdef";
+    base_len = 16;
+
+    nb = (unsigned long)p;
     if (nb == 0)
     {
-        write(1, &"0", 1);
-        return (1);
+        write(1, &"(nil)", 5);
+        return (5);
     }
-    base_len = 0;
-    if (nb < 0)
-    {
-        write(1, &"-", 1);
-        nb = -nb;
-    }
-    while (base[base_len])
-        base_len++;
-    num_len = get_int_len(nb, base);
-    str = ft_calloc(num_len, sizeof(char));
+    write(1, "0x", 2);
     i = 0;
     while (nb != 0) 
     {
@@ -59,22 +56,22 @@ int putnbr_base(long n, char *base)
         nb /= base_len;
         i++;
     }
+    len = i;
     i--;
     while (i >= 0)
     {
         write(1, &str[i], 1);
         i--;
     }
-    free(str);
-    return(num_len + (n < 0));
+    return(len + 2);
 }
 
-// #include <limits.h>
-// int	main(void)
+// #include <stdio.h>
+// int main(void)
 // {
-// 	char *base = "0123456789";
-// 	long test = LONG_MIN;
-// 	// printf("%d", get_int_len(test, base));
-// 	// putnbr_base(test, base);
-// 	printf("%li", test);
+//     void *p;
+
+//     p = (void *)-8;
+//     printf("printf: %d;", printf("%p\n", ""));
+//     printf("put_pointer_addr: %d;", put_pointer_addr(""));
 // }

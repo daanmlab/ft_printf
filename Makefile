@@ -3,10 +3,12 @@ LIBFT = ./libft/libft.a
 NAME = libftprintf.a
 
 SRCS =  ft_printf.c \
-		putnbr_base.c 
+		putnbr_base.c \
+		put_pointer_addr.c
 		
 SURPL_O = 	ft_printf.o \
-			putnbr_base.o  
+			putnbr_base.o \
+			put_pointer_addr.o
 
 CC = cc
 

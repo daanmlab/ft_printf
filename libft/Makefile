@@ -17,7 +17,7 @@ CFLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	$(AR) -r $@ $?
+	ar rcs $(NAME) $(OBJECTS)
 
 %.o: %.c
 	$(CC) -c $(CFLAGS) $?
